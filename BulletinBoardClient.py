@@ -49,22 +49,21 @@ def post_to_server(sock):  # Handle POST command
             typing = False
 
     try:
-        sock.sendall(message.encode())  # Send data
-        receive_message(sock)  # Receive and print data from server
+        sock.sendall(message.encode())
+        receive_message(sock)
     except Exception as e:  # Catch error when the message cant send to server
         print(e)
         sock.close()
         sys.exit()
 
 
-def read_quit_others_command_to_server(sock, command):  # Handle READ, QUIT, and other not exist command
-    message = command.encode()
-
+def read_quit_others_command_to_server(sock, message):  # Handle READ, QUIT, and other not exist command
+    message = message.encode()
     try:
-        sock.sendall(message)  # Send data
-        receive_message(sock)  # Receive and print data from server
+        sock.sendall(message)
+        receive_message(sock)
 
-        if command == "QUIT":
+        if message == "QUIT":
             sock.close()  # Close the socket connect between client and server.
     except Exception as e:
         print(e)
